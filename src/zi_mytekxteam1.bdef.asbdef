@@ -1,0 +1,36 @@
+managed;
+// with draft;
+
+define behavior for ZI_MYTEKXTEAM1 alias MYTEKXTeam
+implementation in class zbp_i_mytekxteam1 unique
+persistent table zrap_mytekxteam1
+// draft table zdr_mytekxteam1
+lock master // total etag LastChangedAt
+etag master LocalLastChangedAt
+{
+  create;
+  update;
+  delete;
+
+  field ( numbering : managed, readonly ) Id;
+  field ( readonly ) Active, Salary;
+  field ( readonly ) LastChangedAt, LocalLastChangedAt;
+
+  action ( features : instance ) setActive result [1] $self;
+  determination changeSalary on save { field Role; }
+  validation validateAge on save { field Age; create; }
+
+
+  mapping for zrap_mytekxteam1
+  {
+    Id = id;
+    FirstName = firstName;
+    LastName = lastName;
+    Age = age;
+    Role = role;
+    Salary = salary;
+    Active = active;
+    LastChangedAt = last_changed_at;
+    LocalLastChangedAt = local_last_changed_at;
+  }
+}

@@ -1,0 +1,4 @@
+@EndUserText.label: 'Service definition for Mytekx team'
+define service Z_EXPOSE_MYTEKXTEAM1 {
+  expose ZC_MYTEKXTEAM1 as MYTEKXTeam;
+}
